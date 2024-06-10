@@ -18,6 +18,10 @@ if uploaded_file:
         summary_api = summary_client.ContentSummaryGeneratorAPI()
         st.session_state.content_summary = summary_api.get_content_summary(document)
 
+        # TODO call the word cloud generator API and save the image in sessionstate
+
     # Display the summarization
     st.subheader("Summary")
     st.write(st.session_state.content_summary)
+
+    # TODO display the word cloud image
