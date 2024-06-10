@@ -1,0 +1,12 @@
+{
+    "hosted-zone:account=119277175093:domainName=arnajean.people.aws.dev:region=us-west-2": {
+        "Id": "/hostedzone/Z05001011Q9DA2S2BZWPJ",
+        "Name": "arnajean.people.aws.dev"
+    },
+    "availability-zones:account=119277175093:region=us-west-2": [
+        "us-west-2a",
+        "us-west-2b",
+        "us-west-2c",
+        "us-west-2d"
+    ]
+}

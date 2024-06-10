@@ -1,0 +1,23 @@
+{
+    "name": "content-summary-generator",
+    "version": "1.0.0",
+    "description": "Summarizes a given document",
+    "private": true,
+    "license": "Apache-2.0",
+    "scripts": {
+        "build": "tsc",
+        "test": "jest"
+    },
+    "devDependencies": {
+        "@types/jest": "^29.0.0",
+        "@types/node": "^20.8.10",
+        "aws-sdk-client-mock": "^3.0.0",
+        "aws-sdk-client-mock-jest": "^3.0.0",
+        "jest": "^29.7.0",
+        "ts-jest": "^29.1.1",
+        "typescript": "^5.2.2"
+    },
+    "dependencies": {
+        "@aws-sdk/client-bedrock-runtime": "^3.451.0"
+    }
+}

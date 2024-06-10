@@ -1,0 +1,5 @@
+wordcloud/WordCloudRequest.class
+wordcloud/WordCloudGenerator.class
+wordcloud/WordCloudRequest$WordCloudRequestBuilder.class
+wordcloud/WordCloudResponse$WordCloudResponseBuilder.class
+wordcloud/WordCloudResponse.class

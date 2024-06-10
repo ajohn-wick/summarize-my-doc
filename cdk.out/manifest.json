@@ -1,0 +1,227 @@
+{
+  "version": "35.0.0",
+  "artifacts": {
+    "SummarizeMyDoc-Backend.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "SummarizeMyDoc-Backend.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "SummarizeMyDoc-Backend": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://119277175093/us-west-2",
+      "properties": {
+        "templateFile": "SummarizeMyDoc-Backend.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::119277175093:role/cdk-hnb659fds-deploy-role-119277175093-us-west-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::119277175093:role/cdk-hnb659fds-cfn-exec-role-119277175093-us-west-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-119277175093-us-west-2/f7c54eaf8cd67cfb9e2427b67cc5a2b229e81221bd1b11fd16d4099e9ccd5219.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "SummarizeMyDoc-Backend.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::119277175093:role/cdk-hnb659fds-lookup-role-119277175093-us-west-2",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "SummarizeMyDoc-Backend.assets"
+      ],
+      "metadata": {
+        "/SummarizeMyDoc-Backend/ContentSummaryGenerator/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ContentSummaryGeneratorServiceRole806DBF20"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/ContentSummaryGenerator/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ContentSummaryGeneratorServiceRoleDefaultPolicyAC0919FD"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/ContentSummaryGenerator/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ContentSummaryGeneratorFA7397CB"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/ContentSummaryGenerator/LogRetention/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ContentSummaryGeneratorLogRetention969254E4"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/WordCloudGenerator/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WordCloudGeneratorServiceRole2D11DCC9"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/WordCloudGenerator/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WordCloudGenerator4BF023A7"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/WordCloudGenerator/LogRetention/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WordCloudGeneratorLogRetention4D863432"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIs5AFB4826"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/CloudWatchRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIsCloudWatchRole75E5506A"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Account": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIsAccount5924013C"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIsDeploymentB515D1A48079d0cad6ad67c18bc146645119ee81"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIsDeploymentStageprodBA324932"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIsEndpoint83330A7F"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIsOPTIONS8FAB1947"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/content-summary-generator/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIscontentsummarygenerator28E567CA"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/content-summary-generator/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIscontentsummarygeneratorOPTIONS0FB5487E"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/content-summary-generator/POST/ApiPermission.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..content-summary-generator": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIscontentsummarygeneratorPOSTApiPermissionSummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCBPOSTcontentsummarygenerator1E269E35"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/content-summary-generator/POST/ApiPermission.Test.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..content-summary-generator": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIscontentsummarygeneratorPOSTApiPermissionTestSummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCBPOSTcontentsummarygenerator294A86B0"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/content-summary-generator/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIscontentsummarygeneratorPOST3D8AD6BB"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/word-cloud-generator/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIswordcloudgeneratorCD0E26D4"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/word-cloud-generator/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIswordcloudgeneratorOPTIONSC62A51F3"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/word-cloud-generator/POST/ApiPermission.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..word-cloud-generator": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIswordcloudgeneratorPOSTApiPermissionSummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCBPOSTwordcloudgenerator2C71DF1F"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/word-cloud-generator/POST/ApiPermission.Test.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..word-cloud-generator": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIswordcloudgeneratorPOSTApiPermissionTestSummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCBPOSTwordcloudgeneratorAEB37306"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/word-cloud-generator/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SummarizeMyDocBackendAPIswordcloudgeneratorPOSTAEA5872E"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/SummarizeMyDoc-Backend/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "SummarizeMyDoc-Backend"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

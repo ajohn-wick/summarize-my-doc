@@ -1,0 +1,1226 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "SummarizeMyDoc-Backend": {
+        "id": "SummarizeMyDoc-Backend",
+        "path": "SummarizeMyDoc-Backend",
+        "children": {
+          "ContentSummaryGenerator": {
+            "id": "ContentSummaryGenerator",
+            "path": "SummarizeMyDoc-Backend/ContentSummaryGenerator",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "SummarizeMyDoc-Backend/ContentSummaryGenerator/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "SummarizeMyDoc-Backend/ContentSummaryGenerator/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.108.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "SummarizeMyDoc-Backend/ContentSummaryGenerator/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.108.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "SummarizeMyDoc-Backend/ContentSummaryGenerator/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "SummarizeMyDoc-Backend/ContentSummaryGenerator/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "bedrock:InvokeModel",
+                                  "Effect": "Allow",
+                                  "Resource": "arn:aws:bedrock:*::foundation-model/amazon.titan-text-express-v1"
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "ContentSummaryGeneratorServiceRoleDefaultPolicyAC0919FD",
+                            "roles": [
+                              {
+                                "Ref": "ContentSummaryGeneratorServiceRole806DBF20"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.108.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.108.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.108.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "SummarizeMyDoc-Backend/ContentSummaryGenerator/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "SummarizeMyDoc-Backend/ContentSummaryGenerator/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.108.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "SummarizeMyDoc-Backend/ContentSummaryGenerator/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.108.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.108.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "SummarizeMyDoc-Backend/ContentSummaryGenerator/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": "cdk-hnb659fds-assets-119277175093-us-west-2",
+                      "s3Key": "161433c89fb9304fa865a0af8697e5ee0e416599abfcb31f949f075bfba90334.zip"
+                    },
+                    "environment": {
+                      "variables": {
+                        "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+                      }
+                    },
+                    "handler": "index.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "ContentSummaryGeneratorServiceRole806DBF20",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "nodejs16.x",
+                    "timeout": 30
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.108.0"
+                }
+              },
+              "LogRetention": {
+                "id": "LogRetention",
+                "path": "SummarizeMyDoc-Backend/ContentSummaryGenerator/LogRetention",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "SummarizeMyDoc-Backend/ContentSummaryGenerator/LogRetention/Resource",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.108.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_logs.LogRetention",
+                  "version": "2.108.0"
+                }
+              },
+              "LogGroup": {
+                "id": "LogGroup",
+                "path": "SummarizeMyDoc-Backend/ContentSummaryGenerator/LogGroup",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.108.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda_nodejs.NodejsFunction",
+              "version": "2.108.0"
+            }
+          },
+          "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a": {
+            "id": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a",
+            "path": "SummarizeMyDoc-Backend/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "SummarizeMyDoc-Backend/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "SummarizeMyDoc-Backend/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.108.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "SummarizeMyDoc-Backend/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.108.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.108.0"
+                }
+              },
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "SummarizeMyDoc-Backend/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "SummarizeMyDoc-Backend/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.108.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "SummarizeMyDoc-Backend/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.108.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "SummarizeMyDoc-Backend/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "SummarizeMyDoc-Backend/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "logs:PutRetentionPolicy",
+                                    "logs:DeleteRetentionPolicy"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+                            "roles": [
+                              {
+                                "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.108.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.108.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.108.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "SummarizeMyDoc-Backend/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.108.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "WordCloudGenerator": {
+            "id": "WordCloudGenerator",
+            "path": "SummarizeMyDoc-Backend/WordCloudGenerator",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "SummarizeMyDoc-Backend/WordCloudGenerator/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "SummarizeMyDoc-Backend/WordCloudGenerator/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.108.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "SummarizeMyDoc-Backend/WordCloudGenerator/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.108.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.108.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "SummarizeMyDoc-Backend/WordCloudGenerator/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "SummarizeMyDoc-Backend/WordCloudGenerator/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.108.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "SummarizeMyDoc-Backend/WordCloudGenerator/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.108.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.108.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "SummarizeMyDoc-Backend/WordCloudGenerator/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": "cdk-hnb659fds-assets-119277175093-us-west-2",
+                      "s3Key": "8ea8c57c05366a0f7af69c754edd6cd67f8feb9d730484e55de263fbe65d5103.jar"
+                    },
+                    "handler": "wordcloud.WordCloudGenerator",
+                    "memorySize": 1024,
+                    "role": {
+                      "Fn::GetAtt": [
+                        "WordCloudGeneratorServiceRole2D11DCC9",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "java8.al2",
+                    "timeout": 30
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.108.0"
+                }
+              },
+              "LogRetention": {
+                "id": "LogRetention",
+                "path": "SummarizeMyDoc-Backend/WordCloudGenerator/LogRetention",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "SummarizeMyDoc-Backend/WordCloudGenerator/LogRetention/Resource",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.108.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_logs.LogRetention",
+                  "version": "2.108.0"
+                }
+              },
+              "LogGroup": {
+                "id": "LogGroup",
+                "path": "SummarizeMyDoc-Backend/WordCloudGenerator/LogGroup",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.108.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.108.0"
+            }
+          },
+          "SummarizeMyDocBackendAPIs": {
+            "id": "SummarizeMyDocBackendAPIs",
+            "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::RestApi",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "Backend APIs for Summarize My Doc",
+                    "name": "SummarizeMyDocBackendAPIs"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.CfnRestApi",
+                  "version": "2.108.0"
+                }
+              },
+              "CloudWatchRole": {
+                "id": "CloudWatchRole",
+                "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/CloudWatchRole",
+                "children": {
+                  "ImportCloudWatchRole": {
+                    "id": "ImportCloudWatchRole",
+                    "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/CloudWatchRole/ImportCloudWatchRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.108.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/CloudWatchRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "apigateway.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.108.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.108.0"
+                }
+              },
+              "Account": {
+                "id": "Account",
+                "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Account",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Account",
+                  "aws:cdk:cloudformation:props": {
+                    "cloudWatchRoleArn": {
+                      "Fn::GetAtt": [
+                        "SummarizeMyDocBackendAPIsCloudWatchRole75E5506A",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.CfnAccount",
+                  "version": "2.108.0"
+                }
+              },
+              "Deployment": {
+                "id": "Deployment",
+                "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Deployment",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Deployment/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Deployment",
+                      "aws:cdk:cloudformation:props": {
+                        "description": "Backend APIs for Summarize My Doc",
+                        "restApiId": {
+                          "Ref": "SummarizeMyDocBackendAPIs5AFB4826"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnDeployment",
+                      "version": "2.108.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.Deployment",
+                  "version": "2.108.0"
+                }
+              },
+              "DeploymentStage.prod": {
+                "id": "DeploymentStage.prod",
+                "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/DeploymentStage.prod",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/DeploymentStage.prod/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Stage",
+                      "aws:cdk:cloudformation:props": {
+                        "deploymentId": {
+                          "Ref": "SummarizeMyDocBackendAPIsDeploymentB515D1A48079d0cad6ad67c18bc146645119ee81"
+                        },
+                        "restApiId": {
+                          "Ref": "SummarizeMyDocBackendAPIs5AFB4826"
+                        },
+                        "stageName": "prod"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnStage",
+                      "version": "2.108.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.Stage",
+                  "version": "2.108.0"
+                }
+              },
+              "Endpoint": {
+                "id": "Endpoint",
+                "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Endpoint",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.108.0"
+                }
+              },
+              "Default": {
+                "id": "Default",
+                "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default",
+                "children": {
+                  "OPTIONS": {
+                    "id": "OPTIONS",
+                    "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/OPTIONS",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/OPTIONS/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                          "aws:cdk:cloudformation:props": {
+                            "apiKeyRequired": false,
+                            "authorizationType": "NONE",
+                            "httpMethod": "OPTIONS",
+                            "integration": {
+                              "type": "MOCK",
+                              "requestTemplates": {
+                                "application/json": "{ statusCode: 200 }"
+                              },
+                              "integrationResponses": [
+                                {
+                                  "statusCode": "204",
+                                  "responseParameters": {
+                                    "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                                    "method.response.header.Access-Control-Allow-Origin": "'*'",
+                                    "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+                                  }
+                                }
+                              ]
+                            },
+                            "methodResponses": [
+                              {
+                                "statusCode": "204",
+                                "responseParameters": {
+                                  "method.response.header.Access-Control-Allow-Headers": true,
+                                  "method.response.header.Access-Control-Allow-Origin": true,
+                                  "method.response.header.Access-Control-Allow-Methods": true
+                                }
+                              }
+                            ],
+                            "resourceId": {
+                              "Fn::GetAtt": [
+                                "SummarizeMyDocBackendAPIs5AFB4826",
+                                "RootResourceId"
+                              ]
+                            },
+                            "restApiId": {
+                              "Ref": "SummarizeMyDocBackendAPIs5AFB4826"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                          "version": "2.108.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                      "version": "2.108.0"
+                    }
+                  },
+                  "content-summary-generator": {
+                    "id": "content-summary-generator",
+                    "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/content-summary-generator",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/content-summary-generator/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                          "aws:cdk:cloudformation:props": {
+                            "parentId": {
+                              "Fn::GetAtt": [
+                                "SummarizeMyDocBackendAPIs5AFB4826",
+                                "RootResourceId"
+                              ]
+                            },
+                            "pathPart": "content-summary-generator",
+                            "restApiId": {
+                              "Ref": "SummarizeMyDocBackendAPIs5AFB4826"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                          "version": "2.108.0"
+                        }
+                      },
+                      "OPTIONS": {
+                        "id": "OPTIONS",
+                        "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/content-summary-generator/OPTIONS",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/content-summary-generator/OPTIONS/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                              "aws:cdk:cloudformation:props": {
+                                "apiKeyRequired": false,
+                                "authorizationType": "NONE",
+                                "httpMethod": "OPTIONS",
+                                "integration": {
+                                  "type": "MOCK",
+                                  "requestTemplates": {
+                                    "application/json": "{ statusCode: 200 }"
+                                  },
+                                  "integrationResponses": [
+                                    {
+                                      "statusCode": "204",
+                                      "responseParameters": {
+                                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                                        "method.response.header.Access-Control-Allow-Origin": "'*'",
+                                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+                                      }
+                                    }
+                                  ]
+                                },
+                                "methodResponses": [
+                                  {
+                                    "statusCode": "204",
+                                    "responseParameters": {
+                                      "method.response.header.Access-Control-Allow-Headers": true,
+                                      "method.response.header.Access-Control-Allow-Origin": true,
+                                      "method.response.header.Access-Control-Allow-Methods": true
+                                    }
+                                  }
+                                ],
+                                "resourceId": {
+                                  "Ref": "SummarizeMyDocBackendAPIscontentsummarygenerator28E567CA"
+                                },
+                                "restApiId": {
+                                  "Ref": "SummarizeMyDocBackendAPIs5AFB4826"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                              "version": "2.108.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                          "version": "2.108.0"
+                        }
+                      },
+                      "POST": {
+                        "id": "POST",
+                        "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/content-summary-generator/POST",
+                        "children": {
+                          "ApiPermission.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..content-summary-generator": {
+                            "id": "ApiPermission.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..content-summary-generator",
+                            "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/content-summary-generator/POST/ApiPermission.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..content-summary-generator",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ContentSummaryGeneratorFA7397CB",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:us-west-2:119277175093:",
+                                      {
+                                        "Ref": "SummarizeMyDocBackendAPIs5AFB4826"
+                                      },
+                                      "/",
+                                      {
+                                        "Ref": "SummarizeMyDocBackendAPIsDeploymentStageprodBA324932"
+                                      },
+                                      "/POST/content-summary-generator"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.108.0"
+                            }
+                          },
+                          "ApiPermission.Test.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..content-summary-generator": {
+                            "id": "ApiPermission.Test.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..content-summary-generator",
+                            "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/content-summary-generator/POST/ApiPermission.Test.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..content-summary-generator",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ContentSummaryGeneratorFA7397CB",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:us-west-2:119277175093:",
+                                      {
+                                        "Ref": "SummarizeMyDocBackendAPIs5AFB4826"
+                                      },
+                                      "/test-invoke-stage/POST/content-summary-generator"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.108.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/content-summary-generator/POST/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                              "aws:cdk:cloudformation:props": {
+                                "authorizationType": "AWS_IAM",
+                                "httpMethod": "POST",
+                                "integration": {
+                                  "type": "AWS_PROXY",
+                                  "uri": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":apigateway:us-west-2:lambda:path/2015-03-31/functions/",
+                                        {
+                                          "Fn::GetAtt": [
+                                            "ContentSummaryGeneratorFA7397CB",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/invocations"
+                                      ]
+                                    ]
+                                  },
+                                  "integrationHttpMethod": "POST"
+                                },
+                                "resourceId": {
+                                  "Ref": "SummarizeMyDocBackendAPIscontentsummarygenerator28E567CA"
+                                },
+                                "restApiId": {
+                                  "Ref": "SummarizeMyDocBackendAPIs5AFB4826"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                              "version": "2.108.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                          "version": "2.108.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Resource",
+                      "version": "2.108.0"
+                    }
+                  },
+                  "word-cloud-generator": {
+                    "id": "word-cloud-generator",
+                    "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/word-cloud-generator",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/word-cloud-generator/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                          "aws:cdk:cloudformation:props": {
+                            "parentId": {
+                              "Fn::GetAtt": [
+                                "SummarizeMyDocBackendAPIs5AFB4826",
+                                "RootResourceId"
+                              ]
+                            },
+                            "pathPart": "word-cloud-generator",
+                            "restApiId": {
+                              "Ref": "SummarizeMyDocBackendAPIs5AFB4826"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                          "version": "2.108.0"
+                        }
+                      },
+                      "OPTIONS": {
+                        "id": "OPTIONS",
+                        "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/word-cloud-generator/OPTIONS",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/word-cloud-generator/OPTIONS/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                              "aws:cdk:cloudformation:props": {
+                                "apiKeyRequired": false,
+                                "authorizationType": "NONE",
+                                "httpMethod": "OPTIONS",
+                                "integration": {
+                                  "type": "MOCK",
+                                  "requestTemplates": {
+                                    "application/json": "{ statusCode: 200 }"
+                                  },
+                                  "integrationResponses": [
+                                    {
+                                      "statusCode": "204",
+                                      "responseParameters": {
+                                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                                        "method.response.header.Access-Control-Allow-Origin": "'*'",
+                                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+                                      }
+                                    }
+                                  ]
+                                },
+                                "methodResponses": [
+                                  {
+                                    "statusCode": "204",
+                                    "responseParameters": {
+                                      "method.response.header.Access-Control-Allow-Headers": true,
+                                      "method.response.header.Access-Control-Allow-Origin": true,
+                                      "method.response.header.Access-Control-Allow-Methods": true
+                                    }
+                                  }
+                                ],
+                                "resourceId": {
+                                  "Ref": "SummarizeMyDocBackendAPIswordcloudgeneratorCD0E26D4"
+                                },
+                                "restApiId": {
+                                  "Ref": "SummarizeMyDocBackendAPIs5AFB4826"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                              "version": "2.108.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                          "version": "2.108.0"
+                        }
+                      },
+                      "POST": {
+                        "id": "POST",
+                        "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/word-cloud-generator/POST",
+                        "children": {
+                          "ApiPermission.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..word-cloud-generator": {
+                            "id": "ApiPermission.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..word-cloud-generator",
+                            "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/word-cloud-generator/POST/ApiPermission.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..word-cloud-generator",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "WordCloudGenerator4BF023A7",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:us-west-2:119277175093:",
+                                      {
+                                        "Ref": "SummarizeMyDocBackendAPIs5AFB4826"
+                                      },
+                                      "/",
+                                      {
+                                        "Ref": "SummarizeMyDocBackendAPIsDeploymentStageprodBA324932"
+                                      },
+                                      "/POST/word-cloud-generator"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.108.0"
+                            }
+                          },
+                          "ApiPermission.Test.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..word-cloud-generator": {
+                            "id": "ApiPermission.Test.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..word-cloud-generator",
+                            "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/word-cloud-generator/POST/ApiPermission.Test.SummarizeMyDocBackendSummarizeMyDocBackendAPIsA501CDCB.POST..word-cloud-generator",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "WordCloudGenerator4BF023A7",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:us-west-2:119277175093:",
+                                      {
+                                        "Ref": "SummarizeMyDocBackendAPIs5AFB4826"
+                                      },
+                                      "/test-invoke-stage/POST/word-cloud-generator"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.108.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "SummarizeMyDoc-Backend/SummarizeMyDocBackendAPIs/Default/word-cloud-generator/POST/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                              "aws:cdk:cloudformation:props": {
+                                "authorizationType": "AWS_IAM",
+                                "httpMethod": "POST",
+                                "integration": {
+                                  "type": "AWS_PROXY",
+                                  "uri": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":apigateway:us-west-2:lambda:path/2015-03-31/functions/",
+                                        {
+                                          "Fn::GetAtt": [
+                                            "WordCloudGenerator4BF023A7",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/invocations"
+                                      ]
+                                    ]
+                                  },
+                                  "integrationHttpMethod": "POST"
+                                },
+                                "resourceId": {
+                                  "Ref": "SummarizeMyDocBackendAPIswordcloudgeneratorCD0E26D4"
+                                },
+                                "restApiId": {
+                                  "Ref": "SummarizeMyDocBackendAPIs5AFB4826"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                              "version": "2.108.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                          "version": "2.108.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Resource",
+                      "version": "2.108.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.ResourceBase",
+                  "version": "2.108.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_apigateway.RestApi",
+              "version": "2.108.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "SummarizeMyDoc-Backend/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "SummarizeMyDoc-Backend/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.108.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "SummarizeMyDoc-Backend/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.108.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "SummarizeMyDoc-Backend/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.108.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.108.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.3.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.108.0"
+    }
+  }
+}
