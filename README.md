@@ -43,7 +43,7 @@ cdk deploy --app 'python3 cdk_stacks.py' SummarizeMyDoc-Backend --profile $AWS_P
 
 Edit the file `config.json` to specify the endpoint of your Amazon API Gateway previously deployed.
 
-Set AWS credentials into your favorite terminal to ensure this Streamlit app can perform API calls to AWS services on your behalf.
+Make sure to set AWS credentials into your favorite terminal so this Streamlit app can perform API calls to AWS services on your behalf.
 
 Run in the same terminal your streamlit app thanks to the following commands:
 ```sh
