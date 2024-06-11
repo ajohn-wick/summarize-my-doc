@@ -27,7 +27,6 @@ npm test
 ```sh
 mvn compile test-compile
 mvn exec:java -Dexec.mainClass="wordcloud.WordCloudGeneratorLocalInvoke" -Dexec.classpathScope=test
-# BUCKET_NAME=[YOUR AWS S3 BUCKET NAME] mvn exec:java -Dexec.mainClass="wordcloud.WordCloudGeneratorLocalInvoke" -Dexec.classpathScope=test
 ```
 
 ## Test word-cloud-generator
