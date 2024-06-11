@@ -71,6 +71,8 @@ public class WordCloudGenerator implements RequestHandler<APIGatewayProxyRequest
             logger.debug("Img data:");
             logger.debug(new BASE64Encoder().encode(imgData));
 
+            // TO DO: Upload the image to S3 and generate a pre-signed URL
+
             WordCloudResponse imgResponse = WordCloudResponse.builder().wordCloudImage(imgData).build();
             String serializedImg = mapper.writeValueAsString(imgResponse);
 
